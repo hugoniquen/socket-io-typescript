@@ -22,6 +22,12 @@ app.use(cors());
 io.on('connection', (socket: Socket)=>{
     console.log('a user connected');
 
+    // Evento personalizado -manejar el registro a una sala
+    socket.on('join room', (room)=>{
+        socket.join(room);
+        console.log(`User joined room: ${room}`);
+    });    
+    
     socket.on('chat message', (msg)=>{
         io.emit('chat message', msg);
     })
